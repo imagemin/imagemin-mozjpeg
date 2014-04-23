@@ -17,8 +17,9 @@ var mozjpeg = require('imagemin-mozjpeg');
 var imagemin = new Imagemin()
     .src('foo.jpg')
     .dest('foo-optimized.jpg')
-    .use(mozjpeg())
-    .optimize();
+    .use(mozjpeg());
+
+imagemin.optimize();
 ```
 
 ## License
