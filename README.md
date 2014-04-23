@@ -1,6 +1,6 @@
 # imagemin-mozjpeg [![Build Status](https://travis-ci.org/kevva/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/kevva/imagemin-mozjpeg)
 
-> Check if a Buffer/Uint8Array is a BZIP2 file
+> mozjpeg image-min plugin
 
 ## Install
 
