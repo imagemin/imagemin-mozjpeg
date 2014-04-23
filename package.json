@@ -1,0 +1,41 @@
+{
+  "name": "imagemin-mozjpeg",
+  "version": "0.1.0",
+  "description": "mozjpeg image-min plugin",
+  "license": "MIT",
+  "repository": "kevva/imagemin-mozjpeg",
+  "author": {
+    "name": "Kevin Mårtensson",
+    "email": "kevinmartensson@gmail.com",
+    "url": "https://github.com/kevva"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha --reporter list"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "imagemin",
+    "jpeg",
+    "jpg",
+    "img",
+    "image",
+    "compress",
+    "minify",
+    "plugin",
+    "optimize"
+  ],
+  "devDependencies": {
+    "image-min": "^0.4.2",
+    "mocha": "^1.18.2"
+  },
+  "dependencies": {
+    "image-type": "^0.1.1",
+    "mozjpeg": "^0.1.0",
+    "tempfile": "^0.1.3"
+  }
+}
