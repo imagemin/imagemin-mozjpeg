@@ -19,14 +19,13 @@
     "index.js"
   ],
   "keywords": [
-    "imagemin",
+    "compress",
+    "image",
+    "imageminplugin"
+    "img",
     "jpeg",
     "jpg",
-    "img",
-    "image",
-    "compress",
     "minify",
-    "plugin",
     "optimize"
   ],
   "dependencies": {
