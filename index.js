@@ -8,7 +8,7 @@ var tempfile = require('tempfile');
 var rm = require('rimraf');
 
 /**
- * jpegtran image-min plugin
+ * mozjpeg image-min plugin
  *
  * @param {Object} opts
  * @api public
