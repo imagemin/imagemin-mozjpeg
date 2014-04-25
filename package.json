@@ -1,6 +1,6 @@
 {
   "name": "imagemin-mozjpeg",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "mozjpeg image-min plugin",
   "license": "MIT",
   "repository": "kevva/imagemin-mozjpeg",
