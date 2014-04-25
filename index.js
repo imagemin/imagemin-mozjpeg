@@ -22,6 +22,10 @@ module.exports = function (opts) {
         var exec = new ExecBuffer();
         var args = ['-copy', 'none'];
 
+        if (opts.fastcrush) {
+            args.push('-fastcrush');
+        }
+
         exec
             .use(mozjpeg, args.concat(['-outfile', exec.dest(), exec.src()]))
             .run(file.contents, function (err, buf) {

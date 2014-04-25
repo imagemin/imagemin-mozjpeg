@@ -22,6 +22,15 @@ var imagemin = new Imagemin()
 imagemin.optimize();
 ```
 
+## Options
+
+### fastcrush
+
+Type: `Boolean`  
+Default: `false`
+
+Disable progressive scan optimization.
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Kevin Mårtensson](https://github.com/kevva)
