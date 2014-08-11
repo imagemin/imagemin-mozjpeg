@@ -34,7 +34,7 @@
     "mozjpeg": "^0.1.0"
   },
   "devDependencies": {
-    "image-min": "^0.4.2",
+    "imagemin": "^0.4.7",
     "mocha": "^1.18.2"
   }
 }
