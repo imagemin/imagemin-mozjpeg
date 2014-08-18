@@ -29,12 +29,12 @@
     "optimize"
   ],
   "dependencies": {
-    "exec-buffer": "^0.1.0",
-    "image-type": "^0.1.1",
-    "mozjpeg": "^0.1.0"
+    "exec-buffer": "^1.0.0",
+    "image-type": "^1.0.0",
+    "mozjpeg": "^0.1.10"
   },
   "devDependencies": {
     "ava": "0.0.4",
-    "imagemin": "^0.4.7"
+    "imagemin": "^1.0.0"
   }
 }
