@@ -1,23 +1,26 @@
-/*global describe, it */
 'use strict';
 
-var assert = require('assert');
 var fs = require('fs');
 var Imagemin = require('imagemin');
 var mozjpeg = require('../');
 var path = require('path');
+var test = require('ava');
 
-describe('mozjpeg()', function () {
-	it('should optimize a JPG', function (cb) {
-		var imagemin = new Imagemin();
+test('should optimize a JPG', function (t) {
+    t.plan(4);
 
-		imagemin
-			.src(path.join(__dirname, 'fixtures/test.jpg'))
-			.use(mozjpeg())
-			.optimize(function (err, file) {
-				assert(file.contents.length < fs.statSync(imagemin.src()).size);
-				assert(file.contents.length > 0);
-				cb();
-			});
-	});
+    var imagemin = new Imagemin()
+        .src(path.join(__dirname, 'fixtures/test.jpg'))
+        .use(mozjpeg());
+
+    imagemin.optimize(function (err, file) {
+            t.assert(!err);
+
+            fs.stat(imagemin.src(), function (err, stats) {
+                t.assert(!err);
+                t.assert(file.contents.length < stats.size);
+                t.assert(file.contents.length > 0);
+            });
+        });
 });
+
