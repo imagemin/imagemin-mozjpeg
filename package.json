@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "mozjpeg image-min plugin",
   "license": "MIT",
-  "repository": "kevva/imagemin-mozjpeg",
+  "repository": "imagemin/imagemin-mozjpeg",
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",

@@ -1,4 +1,4 @@
-# imagemin-mozjpeg [![Build Status](https://travis-ci.org/kevva/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/kevva/imagemin-mozjpeg)
+# imagemin-mozjpeg [![Build Status](https://travis-ci.org/kevvaimagemin/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/imagemin/imagemin-mozjpeg)
 
 > mozjpeg image-min plugin
 
@@ -33,4 +33,4 @@ Disable progressive scan optimization.
 
 ## License
 
-MIT © [Kevin Mårtensson](https://github.com/kevva)
+MIT © Imagemin
