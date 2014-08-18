@@ -2,11 +2,13 @@
 
 > mozjpeg image-min plugin
 
+
 ## Install
 
 ```bash
 $ npm install --save imagemin-mozjpeg
 ```
+
 
 ## Usage
 
@@ -15,12 +17,13 @@ var Imagemin = require('image-min');
 var mozjpeg = require('imagemin-mozjpeg');
 
 var imagemin = new Imagemin()
-    .src('foo.jpg')
-    .dest('foo-optimized.jpg')
-    .use(mozjpeg());
+	.src('foo.jpg')
+	.dest('foo-optimized.jpg')
+	.use(mozjpeg());
 
 imagemin.optimize();
 ```
+
 
 ## Options
 
@@ -31,6 +34,7 @@ Default: `false`
 
 Disable progressive scan optimization.
 
+
 ## License
 
-MIT © Imagemin
+MIT © [imagemin](https://github.com/imagemin)
