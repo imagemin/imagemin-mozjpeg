@@ -12,29 +12,31 @@ var mozjpeg = require('mozjpeg').path;
  */
 
 module.exports = function (opts) {
-    opts = opts || {};
+	opts = opts || {};
 
-    return function (file, imagemin, cb) {
-        if (imageType(file.contents) !== 'jpg') {
-            return cb();
-        }
+	return function (file, imagemin, cb) {
+		if (imageType(file.contents) !== 'jpg') {
+			cb();
+			return;
+		}
 
-        var exec = new ExecBuffer();
-        var args = ['-copy', 'none'];
+		var exec = new ExecBuffer();
+		var args = ['-copy', 'none'];
 
-        if (opts.fastcrush) {
-            args.push('-fastcrush');
-        }
+		if (opts.fastcrush) {
+			args.push('-fastcrush');
+		}
 
-        exec
-            .use(mozjpeg, args.concat(['-outfile', exec.dest(), exec.src()]))
-            .run(file.contents, function (err, buf) {
-                if (err) {
-                    return cb(err);
-                }
+		exec
+			.use(mozjpeg, args.concat(['-outfile', exec.dest(), exec.src()]))
+			.run(file.contents, function (err, buf) {
+				if (err) {
+					cb(err);
+					return;
+				}
 
-                file.contents = buf;
-                cb();
-            });
-    };
+				file.contents = buf;
+				cb();
+			});
+	};
 };
