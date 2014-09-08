@@ -31,7 +31,7 @@
   ],
   "dependencies": {
     "is-jpg": "^1.0.0",
-    "mozjpeg": "^0.1.10"
+    "mozjpeg": "^1.0.1"
   },
   "devDependencies": {
     "ava": "^0.0.4",
