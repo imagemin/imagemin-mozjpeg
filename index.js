@@ -1,11 +1,11 @@
 'use strict';
 
-var imageType = require('image-type');
+var isJpg = require('is-jpg');
 var mozjpeg = require('mozjpeg').path;
 var spawn = require('child_process').spawn;
 
 /**
- * mozjpeg image-min plugin
+ * mozjpeg imagemin plugin
  *
  * @param {Object} opts
  * @api public
@@ -15,7 +15,7 @@ module.exports = function (opts) {
 	opts = opts || {};
 
 	return function (file, imagemin, cb) {
-		if (imageType(file.contents) !== 'jpg') {
+		if (!isJpg(file.contents)) {
 			cb();
 			return;
 		}

@@ -1,6 +1,6 @@
 # imagemin-mozjpeg [![Build Status](https://travis-ci.org/imagemin/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/imagemin/imagemin-mozjpeg)
 
-> mozjpeg image-min plugin
+> mozjpeg imagemin plugin
 
 
 ## Install
@@ -13,7 +13,7 @@ $ npm install --save imagemin-mozjpeg
 ## Usage
 
 ```js
-var Imagemin = require('image-min');
+var Imagemin = require('imagemin');
 var mozjpeg = require('imagemin-mozjpeg');
 
 var imagemin = new Imagemin()

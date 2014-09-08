@@ -26,14 +26,15 @@
     "jpeg",
     "jpg",
     "minify",
+    "mozjpeg",
     "optimize"
   ],
   "dependencies": {
-    "image-type": "^1.0.0",
+    "is-jpg": "^1.0.0",
     "mozjpeg": "^0.1.10"
   },
   "devDependencies": {
-    "ava": "0.0.4",
+    "ava": "^0.0.4",
     "imagemin": "^1.0.0"
   }
 }
