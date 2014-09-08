@@ -29,7 +29,6 @@
     "optimize"
   ],
   "dependencies": {
-    "exec-buffer": "^1.0.0",
     "image-type": "^1.0.0",
     "mozjpeg": "^0.1.10"
   },

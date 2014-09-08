@@ -1,8 +1,8 @@
 'use strict';
 
-var ExecBuffer = require('exec-buffer');
 var imageType = require('image-type');
 var mozjpeg = require('mozjpeg').path;
+var spawn = require('child_process').spawn;
 
 /**
  * mozjpeg image-min plugin
@@ -20,23 +20,37 @@ module.exports = function (opts) {
 			return;
 		}
 
-		var exec = new ExecBuffer();
 		var args = ['-copy', 'none'];
+		var ret = [];
+		var len = 0;
 
 		if (opts.fastcrush) {
 			args.push('-fastcrush');
 		}
 
-		exec
-			.use(mozjpeg, args.concat(['-outfile', exec.dest(), exec.src()]))
-			.run(file.contents, function (err, buf) {
-				if (err) {
-					cb(err);
-					return;
-				}
+		var cp = spawn(mozjpeg, args);
 
-				file.contents = buf;
-				cb();
-			});
+		cp.on('error', function (err) {
+			cb(err);
+			return;
+		});
+
+		cp.stderr.setEncoding('utf8');
+		cp.stderr.on('data', function (data) {
+			cb(data);
+			return;
+		});
+
+		cp.stdout.on('data', function (data) {
+			ret.push(data);
+			len += data.length;
+		});
+
+		cp.on('close', function () {
+			file.contents = Buffer.concat(ret, len);
+			cb();
+		});
+
+		cp.stdin.end(file.contents);
 	};
 };
