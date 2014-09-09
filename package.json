@@ -1,7 +1,7 @@
 {
   "name": "imagemin-mozjpeg",
   "version": "1.0.0",
-  "description": "mozjpeg image-min plugin",
+  "description": "mozjpeg imagemin plugin",
   "license": "MIT",
   "repository": "imagemin/imagemin-mozjpeg",
   "author": {
@@ -31,10 +31,12 @@
   ],
   "dependencies": {
     "is-jpg": "^1.0.0",
-    "mozjpeg": "^1.0.1"
+    "mozjpeg": "^1.0.1",
+    "through2": "^0.6.1"
   },
   "devDependencies": {
     "ava": "^0.0.4",
-    "imagemin": "^1.0.0"
+    "imagemin": "^1.0.0",
+    "vinyl": "^0.4.3"
   }
 }

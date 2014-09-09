@@ -1,27 +1,28 @@
 'use strict';
 
+var File = require('vinyl');
 var fs = require('fs');
-var Imagemin = require('imagemin');
 var isJpg = require('is-jpg');
 var mozjpeg = require('../');
 var path = require('path');
 var test = require('ava');
 
-test('should optimize a JPG', function (t) {
-	t.plan(4);
+test('optimize a JPG', function (t) {
+	t.plan(3);
 
-	var imagemin = new Imagemin()
-		.src(path.join(__dirname, 'fixtures/test.jpg'))
-		.use(mozjpeg());
-
-	imagemin.optimize(function (err, file) {
+	fs.readFile(path.join(__dirname, 'fixtures/test.jpg'), function (err, buf) {
 		t.assert(!err);
 
-		fs.stat(imagemin.src(), function (err, stats) {
-			t.assert(!err);
-			t.assert(file.contents.length < stats.size);
-			t.assert(isJpg(file.contents));
+		var stream = mozjpeg();
+		var file = new File({
+			contents: buf
 		});
+
+		stream.on('data', function (data) {
+			t.assert(data.contents.length < buf.length);
+			t.assert(isJpg(data.contents));
+		});
+
+		stream.end(file);
 	});
 });
-

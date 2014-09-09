@@ -3,6 +3,7 @@
 var isJpg = require('is-jpg');
 var mozjpeg = require('mozjpeg').path;
 var spawn = require('child_process').spawn;
+var through = require('through2');
 
 /**
  * mozjpeg imagemin plugin
@@ -14,9 +15,19 @@ var spawn = require('child_process').spawn;
 module.exports = function (opts) {
 	opts = opts || {};
 
-	return function (file, imagemin, cb) {
+	return through.obj(function (file, enc, cb) {
+		if (file.isNull()) {
+			cb(null, file);
+			return;
+		}
+
+		if (file.isStream()) {
+			cb(new Error('Streaming is not supported'));
+			return;
+		}
+
 		if (!isJpg(file.contents)) {
-			cb();
+			cb(null, file);
 			return;
 		}
 
@@ -37,7 +48,7 @@ module.exports = function (opts) {
 
 		cp.stderr.setEncoding('utf8');
 		cp.stderr.on('data', function (data) {
-			cb(data);
+			cb(new Error(data));
 			return;
 		});
 
@@ -48,9 +59,9 @@ module.exports = function (opts) {
 
 		cp.on('close', function () {
 			file.contents = Buffer.concat(ret, len);
-			cb();
+			cb(null, file);
 		});
 
 		cp.stdin.end(file.contents);
-	};
+	});
 };

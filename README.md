@@ -17,11 +17,30 @@ var Imagemin = require('imagemin');
 var mozjpeg = require('imagemin-mozjpeg');
 
 var imagemin = new Imagemin()
-	.src('foo.jpg')
-	.dest('foo-optimized.jpg')
+	.src('images/*.jpg')
+	.dest('build/images')
 	.use(mozjpeg());
 
-imagemin.optimize();
+imagemin.run(function (err, files) {
+	if (err) {
+		throw err;
+	}
+
+	console.log('Files optimized successfully!'); 
+});
+```
+
+You can also use this plugin with [gulp](http://gulpjs.com):
+
+```js
+var gulp = require('gulp');
+var mozjpeg = require('imagemin-mozjpeg');
+
+gulp.task('default', function () {
+	return gulp.src('images/*.jpg')
+		.pipe(mozjpeg())
+		.pipe(gulp.dest('build/images'));
+});
 ```
 
 
