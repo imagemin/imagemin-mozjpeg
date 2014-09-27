@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "ava": "^0.0.4",
-    "vinyl": "^0.4.3"
+    "buffer-equal": "0.0.1",
+    "vinyl-file": "^1.1.0",
+    "vinyl-smallest-jpeg": "^1.0.0"
   }
 }
