@@ -1,6 +1,6 @@
 {
   "name": "imagemin-mozjpeg",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "mozjpeg imagemin plugin",
   "license": "MIT",
   "repository": "imagemin/imagemin-mozjpeg",
