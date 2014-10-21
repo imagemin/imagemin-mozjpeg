@@ -1,7 +1,6 @@
 'use strict';
 
 var bufferEqual = require('buffer-equal');
-var fs = require('fs');
 var isJpg = require('is-jpg');
 var mozjpeg = require('../');
 var path = require('path');
@@ -13,7 +12,7 @@ test('optimize a JPG', function (t) {
 	t.plan(2);
 
 	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
-		t.assert(!err);
+		t.assert(!err, err);
 
 		var stream = mozjpeg();
 		var size = file.contents.length;
@@ -33,7 +32,7 @@ test('optimize a JPG using ctor', function (t) {
 	var Mozjpeg = mozjpeg.ctor();
 
 	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
-		t.assert(!err);
+		t.assert(!err, err);
 
 		var stream = new Mozjpeg();
 		var size = file.contents.length;
@@ -51,7 +50,7 @@ test('skip optimizing a non-JPG file', function (t) {
 	t.plan(2);
 
 	read(__filename, function (err, file) {
-		t.assert(!err);
+		t.assert(!err, err);
 
 		var stream = mozjpeg();
 		var contents = file.contents;
@@ -81,7 +80,7 @@ test('throw error when a JPG is corrupt', function (t) {
 	t.plan(3);
 
 	read(path.join(__dirname, 'fixtures/test-corrupt.jpg'), function (err, file) {
-		t.assert(!err);
+		t.assert(!err, err);
 
 		var stream = mozjpeg();
 
