@@ -38,7 +38,7 @@ var mozjpeg = require('imagemin-mozjpeg');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.jpg')
-		.pipe(mozjpeg())
+		.pipe(mozjpeg()())
 		.pipe(gulp.dest('build/images'));
 });
 ```
