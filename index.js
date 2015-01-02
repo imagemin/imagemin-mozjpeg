@@ -41,11 +41,6 @@ module.exports = function (opts) {
 
 		var cp = spawn(mozjpeg, args);
 
-		cp.on('error', function (err) {
-			cb(err);
-			return;
-		});
-
 		cp.stderr.setEncoding('utf8');
 		cp.stderr.on('data', function (data) {
 			cb(new Error(data));
@@ -57,6 +52,7 @@ module.exports = function (opts) {
 			len += data.length;
 		});
 
+		cp.on('error', cb);
 		cp.on('close', function () {
 			file.contents = Buffer.concat(ret, len);
 			cb(null, file);
