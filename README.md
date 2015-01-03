@@ -19,7 +19,7 @@ var mozjpeg = require('imagemin-mozjpeg');
 var imagemin = new Imagemin()
 	.src('images/*.jpg')
 	.dest('build/images')
-	.use(mozjpeg());
+	.use(mozjpeg({ quality: '65-80' }));
 
 imagemin.run(function (err, files) {
 	if (err) {
@@ -38,7 +38,7 @@ var mozjpeg = require('imagemin-mozjpeg');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.jpg')
-		.pipe(mozjpeg()())
+		.pipe(mozjpeg({ quality: '65-80' })())
 		.pipe(gulp.dest('build/images'));
 });
 ```
@@ -52,6 +52,13 @@ Type: `Boolean`
 Default: `false`
 
 Disable progressive scan optimization.
+
+### quality
+
+Type: `String`  
+Default: `undefined`
+
+Compression quality. Min and max are numbers in range 0 (worst) to 100 (perfect).
 
 
 ## License

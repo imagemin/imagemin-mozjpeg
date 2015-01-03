@@ -39,6 +39,10 @@ module.exports = function (opts) {
 			args.push('-fastcrush');
 		}
 
+		if (opts.quality) {
+			args.push('-quality', opts.quality);
+		}
+
 		var cp = spawn(mozjpeg, args);
 
 		cp.stderr.setEncoding('utf8');
