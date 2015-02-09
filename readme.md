@@ -19,14 +19,14 @@ var mozjpeg = require('imagemin-mozjpeg');
 var imagemin = new Imagemin()
 	.src('images/*.jpg')
 	.dest('build/images')
-	.use(mozjpeg({ quality: '65-80' }));
+	.use(mozjpeg({quality: '65-80'}));
 
 imagemin.run(function (err, files) {
 	if (err) {
 		throw err;
 	}
 
-	console.log('Files optimized successfully!'); 
+	console.log('Files optimized successfully!');
 });
 ```
 
@@ -38,7 +38,7 @@ var mozjpeg = require('imagemin-mozjpeg');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.jpg')
-		.pipe(mozjpeg({ quality: '65-80' })())
+		.pipe(mozjpeg({quality: '65-80'})())
 		.pipe(gulp.dest('build/images'));
 });
 ```

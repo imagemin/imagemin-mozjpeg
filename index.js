@@ -5,17 +5,10 @@ var mozjpeg = require('mozjpeg').path;
 var spawn = require('child_process').spawn;
 var through = require('through2');
 
-/**
- * mozjpeg imagemin plugin
- *
- * @param {Object} opts
- * @api public
- */
-
 module.exports = function (opts) {
 	opts = opts || {};
 
-	return through.ctor({ objectMode: true }, function (file, enc, cb) {
+	return through.ctor({objectMode: true}, function (file, enc, cb) {
 		if (file.isNull()) {
 			cb(null, file);
 			return;
@@ -58,7 +51,10 @@ module.exports = function (opts) {
 
 		cp.on('error', cb);
 		cp.on('close', function () {
-			file.contents = Buffer.concat(ret, len);
+			if (len < file.contents.length) {
+				file.contents = Buffer.concat(ret, len);
+			}
+
 			cb(null, file);
 		});
 
