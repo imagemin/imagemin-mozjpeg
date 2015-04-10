@@ -5,7 +5,7 @@
 
 ## Install
 
-```bash
+```
 $ npm install --save imagemin-mozjpeg
 ```
 
@@ -14,49 +14,43 @@ $ npm install --save imagemin-mozjpeg
 
 ```js
 var Imagemin = require('imagemin');
-var mozjpeg = require('imagemin-mozjpeg');
+var imageminMozjpeg = require('imagemin-mozjpeg');
 
-var imagemin = new Imagemin()
+new Imagemin()
 	.src('images/*.jpg')
 	.dest('build/images')
-	.use(mozjpeg({quality: '65-80'}));
-
-imagemin.run(function (err, files) {
-	if (err) {
-		throw err;
-	}
-
-	console.log('Files optimized successfully!');
-});
+	.use(imageminMozjpeg({quality: '65-80'}))
+	.run();
 ```
 
 You can also use this plugin with [gulp](http://gulpjs.com):
 
 ```js
 var gulp = require('gulp');
-var mozjpeg = require('imagemin-mozjpeg');
+var imageminMozjpeg = require('imagemin-mozjpeg');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.jpg')
-		.pipe(mozjpeg({quality: '65-80'})())
+		.pipe(imageminMozjpeg({quality: '65-80'})())
 		.pipe(gulp.dest('build/images'));
 });
 ```
 
 
-## Options
+## API
 
-### fastcrush
+### imageminMozjpeg(options)
 
-Type: `Boolean`  
+#### options.fastcrush
+
+Type: `boolean`  
 Default: `false`
 
 Disable progressive scan optimization.
 
-### quality
+#### options.quality
 
-Type: `String`  
-Default: `undefined`
+Type: `string`
 
 Compression quality. Min and max are numbers in range 0 (worst) to 100 (perfect).
 

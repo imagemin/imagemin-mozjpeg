@@ -1,12 +1,12 @@
 'use strict';
 
+var path = require('path');
 var bufferEqual = require('buffer-equal');
 var isJpg = require('is-jpg');
-var mozjpeg = require('../');
-var path = require('path');
 var read = require('vinyl-file').read;
-var smallestJpeg = require('vinyl-smallest-jpeg');
 var test = require('ava');
+var vinylSmallestJpeg = require('vinyl-smallest-jpeg');
+var imageminMozjpeg = require('../');
 
 test('optimize a JPG', function (t) {
 	t.plan(2);
@@ -14,11 +14,11 @@ test('optimize a JPG', function (t) {
 	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
 		t.assert(!err, err);
 
-		var stream = mozjpeg()();
+		var stream = imageminMozjpeg()();
 		var size = file.contents.length;
 
 		stream.on('data', function (data) {
-			t.assert(data.contents.length < size);
+			t.assert(data.contents.length < size, data.contents.length);
 			t.assert(isJpg(data.contents));
 		});
 
@@ -32,7 +32,7 @@ test('skip optimizing a non-JPG file', function (t) {
 	read(__filename, function (err, file) {
 		t.assert(!err, err);
 
-		var stream = mozjpeg()();
+		var stream = imageminMozjpeg()();
 		var contents = file.contents;
 
 		stream.on('data', function (data) {
@@ -46,8 +46,8 @@ test('skip optimizing a non-JPG file', function (t) {
 test('skip optimizing an already optimized JPG', function (t) {
 	t.plan(1);
 
-	var file = smallestJpeg();
-	var stream = mozjpeg()();
+	var file = vinylSmallestJpeg();
+	var stream = imageminMozjpeg()();
 
 	stream.on('data', function (data) {
 		t.assert(bufferEqual(data.contents, file.contents));
@@ -62,11 +62,11 @@ test('throw error when a JPG is corrupt', function (t) {
 	read(path.join(__dirname, 'fixtures/test-corrupt.jpg'), function (err, file) {
 		t.assert(!err, err);
 
-		var stream = mozjpeg()();
+		var stream = imageminMozjpeg()();
 
 		stream.on('error', function (err) {
-			t.assert(err);
-			t.assert(/Corrupt JPEG data/.test(err.message));
+			t.assert(err, err);
+			t.assert(/Corrupt JPEG data/.test(err.message), err.message);
 		});
 
 		stream.end(file);

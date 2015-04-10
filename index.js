@@ -1,8 +1,8 @@
 'use strict';
 
+var spawn = require('child_process').spawn;
 var isJpg = require('is-jpg');
 var mozjpeg = require('mozjpeg').path;
-var spawn = require('child_process').spawn;
 var through = require('through2');
 
 module.exports = function (opts) {
