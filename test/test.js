@@ -57,7 +57,7 @@ test('skip optimizing an already optimized JPG', function (t) {
 });
 
 test('throw error when a JPG is corrupt', function (t) {
-	t.plan(3);
+	t.plan(4);
 
 	read(path.join(__dirname, 'fixtures/test-corrupt.jpg'), function (err, file) {
 		t.assert(!err, err);
@@ -66,6 +66,7 @@ test('throw error when a JPG is corrupt', function (t) {
 
 		stream.on('error', function (err) {
 			t.assert(err, err);
+			t.assert(path.basename(err.fileName) === 'test-corrupt.jpg', err.fileName);
 			t.assert(/Corrupt JPEG data/.test(err.message), err.message);
 		});
 

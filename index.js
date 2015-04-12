@@ -40,7 +40,9 @@ module.exports = function (opts) {
 
 		cp.stderr.setEncoding('utf8');
 		cp.stderr.on('data', function (data) {
-			cb(new Error(data));
+			var err = new Error(data);
+			err.fileName = file.path;
+			cb(err);
 			return;
 		});
 
@@ -49,7 +51,12 @@ module.exports = function (opts) {
 			len += data.length;
 		});
 
-		cp.on('error', cb);
+		cp.on('error', function (err) {
+			err.fileName = file.path;
+			cb(err);
+			return;
+		});
+
 		cp.on('close', function () {
 			if (len < file.contents.length) {
 				file.contents = Buffer.concat(ret, len);
