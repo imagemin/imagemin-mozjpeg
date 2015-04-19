@@ -3,13 +3,14 @@
 var path = require('path');
 var bufferEqual = require('buffer-equal');
 var isJpg = require('is-jpg');
+var isProgressive = require('is-progressive');
 var read = require('vinyl-file').read;
 var test = require('ava');
 var vinylSmallestJpeg = require('vinyl-smallest-jpeg');
 var imageminMozjpeg = require('../');
 
 test('optimize a JPG', function (t) {
-	t.plan(2);
+	t.plan(4);
 
 	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
 		t.assert(!err, err);
@@ -20,6 +21,23 @@ test('optimize a JPG', function (t) {
 		stream.on('data', function (data) {
 			t.assert(data.contents.length < size, data.contents.length);
 			t.assert(isJpg(data.contents));
+			t.assert(isProgressive.buffer(data.contents));
+		});
+
+		stream.end(file);
+	});
+});
+
+test('support mozjpeg options', function (t) {
+	t.plan(2);
+
+	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
+		t.assert(!err, err);
+
+		var stream = imageminMozjpeg({progressive: false})();
+
+		stream.on('data', function (data) {
+			t.assert(!isProgressive.buffer(data.contents));
 		});
 
 		stream.end(file);

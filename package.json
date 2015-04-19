@@ -32,12 +32,13 @@
   ],
   "dependencies": {
     "is-jpg": "^1.0.0",
-    "mozjpeg": "^2.0.0",
+    "mozjpeg": "^3.0.0",
     "through2": "^0.6.1"
   },
   "devDependencies": {
     "ava": "^0.0.4",
     "buffer-equal": "0.0.1",
+    "is-progressive": "^1.0.1",
     "vinyl-file": "^1.1.0",
     "vinyl-smallest-jpeg": "^1.0.0"
   }
