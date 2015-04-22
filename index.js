@@ -2,7 +2,7 @@
 
 var spawn = require('child_process').spawn;
 var isJpg = require('is-jpg');
-var mozjpeg = require('mozjpeg').path;
+var mozjpeg = require('mozjpeg');
 var through = require('through2');
 
 module.exports = function (opts) {
