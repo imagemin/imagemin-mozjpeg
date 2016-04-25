@@ -21,7 +21,7 @@
     }
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
     "test": "xo && node test/test.js"
@@ -31,7 +31,6 @@
   ],
   "keywords": [
     "compress",
-    "gulpplugin",
     "image",
     "imageminplugin",
     "img",
@@ -42,16 +41,17 @@
     "optimize"
   ],
   "dependencies": {
+    "exec-buffer": "^3.0.0",
     "is-jpg": "^1.0.0",
-    "mozjpeg": "^4.0.0",
-    "through2": "^0.6.1"
+    "mozjpeg": "^4.0.0"
   },
   "devDependencies": {
     "ava": "^0.0.4",
-    "buffer-equal": "0.0.1",
     "is-progressive": "^1.0.1",
-    "vinyl-file": "^1.1.0",
-    "vinyl-smallest-jpeg": "^1.0.0",
+    "pify": "^2.3.0",
     "xo": "*"
+  },
+  "xo": {
+    "esnext": true
   }
 }

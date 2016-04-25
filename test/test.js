@@ -1,93 +1,51 @@
 'use strict';
-
+var fs = require('fs');
 var path = require('path');
-var bufferEqual = require('buffer-equal');
 var isJpg = require('is-jpg');
 var isProgressive = require('is-progressive');
-var read = require('vinyl-file').read;
+var pify = require('pify');
 var test = require('ava');
-var vinylSmallestJpeg = require('vinyl-smallest-jpeg');
 var imageminMozjpeg = require('../');
+var fsP = pify(fs);
 
 test('optimize a JPG', function (t) {
-	t.plan(4);
+	t.plan(3);
 
-	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
-		t.assert(!err, err);
-
-		var stream = imageminMozjpeg()();
-		var size = file.contents.length;
-
-		stream.on('data', function (data) {
-			t.assert(data.contents.length < size, data.contents.length);
-			t.assert(isJpg(data.contents));
-			t.assert(isProgressive.buffer(data.contents));
+	fsP.readFile(path.join(__dirname, 'fixtures/test.jpg')).then(function (buf) {
+		imageminMozjpeg()(buf).then(function (data) {
+			t.assert(data.length < buf.length, data.length);
+			t.assert(isJpg(data));
+			t.assert(isProgressive.buffer(data));
 		});
-
-		stream.end(file);
 	});
 });
 
 test('support mozjpeg options', function (t) {
-	t.plan(2);
+	t.plan(1);
 
-	read(path.join(__dirname, 'fixtures/test.jpg'), function (err, file) {
-		t.assert(!err, err);
-
-		var stream = imageminMozjpeg({progressive: false})();
-
-		stream.on('data', function (data) {
-			t.assert(!isProgressive.buffer(data.contents));
+	fsP.readFile(path.join(__dirname, 'fixtures/test.jpg')).then(function (buf) {
+		imageminMozjpeg({progressive: false})(buf).then(function (data) {
+			t.assert(!isProgressive.buffer(data));
 		});
-
-		stream.end(file);
 	});
 });
 
 test('skip optimizing a non-JPG file', function (t) {
-	t.plan(2);
-
-	read(__filename, function (err, file) {
-		t.assert(!err, err);
-
-		var stream = imageminMozjpeg()();
-		var contents = file.contents;
-
-		stream.on('data', function (data) {
-			t.assert(bufferEqual(data.contents, contents));
-		});
-
-		stream.end(file);
-	});
-});
-
-test('skip optimizing an already optimized JPG', function (t) {
 	t.plan(1);
 
-	var file = vinylSmallestJpeg();
-	var stream = imageminMozjpeg()();
-
-	stream.on('data', function (data) {
-		t.assert(bufferEqual(data.contents, file.contents));
+	fsP.readFile(__filename).then(function (buf) {
+		imageminMozjpeg()(buf).then(function (data) {
+			t.assert(data.length === buf.length);
+		});
 	});
-
-	stream.end(file);
 });
 
 test('throw error when a JPG is corrupt', function (t) {
-	t.plan(4);
+	t.plan(1);
 
-	read(path.join(__dirname, 'fixtures/test-corrupt.jpg'), function (err, file) {
-		t.assert(!err, err);
-
-		var stream = imageminMozjpeg()();
-
-		stream.on('error', function (err) {
-			t.assert(err, err);
-			t.assert(path.basename(err.fileName) === 'test-corrupt.jpg', err.fileName);
+	fsP.readFile(path.join(__dirname, 'fixtures/test-corrupt.jpg')).then(function (buf) {
+		imageminMozjpeg()(buf).catch(function (err) {
 			t.assert(/Corrupt JPEG data/.test(err.message), err.message);
 		});
-
-		stream.end(file);
 	});
 });

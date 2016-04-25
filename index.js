@@ -1,133 +1,89 @@
 'use strict';
+const execBuffer = require('exec-buffer');
+const isJpg = require('is-jpg');
+const mozjpeg = require('mozjpeg');
 
-var spawn = require('child_process').spawn;
-var isJpg = require('is-jpg');
-var mozjpeg = require('mozjpeg');
-var through = require('through2');
+module.exports = opts => buf => {
+	opts = Object.assign({}, opts);
 
-module.exports = function (opts) {
-	opts = opts || {};
+	if (!Buffer.isBuffer(buf)) {
+		return Promise.reject(new TypeError('Expected a buffer'));
+	}
 
-	return through.ctor({objectMode: true}, function (file, enc, cb) {
-		if (file.isNull()) {
-			cb(null, file);
-			return;
-		}
+	if (!isJpg(buf)) {
+		return Promise.resolve(buf);
+	}
 
-		if (file.isStream()) {
-			cb(new Error('Streaming is not supported'));
-			return;
-		}
+	const args = ['-outfile', execBuffer.output];
 
-		if (!isJpg(file.contents)) {
-			cb(null, file);
-			return;
-		}
+	if (typeof opts.quality !== 'undefined') {
+		args.push('-quality', opts.quality);
+	}
 
-		var args = [];
-		var err = '';
-		var ret = [];
-		var len = 0;
+	if (opts.progressive === false) {
+		args.push('-baseline');
+	}
 
-		if (typeof opts.quality !== 'undefined') {
-			args.push('-quality', opts.quality);
-		}
+	if (opts.targa) {
+		args.push('-targa');
+	}
 
-		if (opts.progressive === false) {
-			args.push('-baseline');
-		}
+	if (opts.revert) {
+		args.push('-revert');
+	}
 
-		if (opts.targa) {
-			args.push('-targa');
-		}
+	if (opts.fastcrush) {
+		args.push('-fastcrush');
+	}
 
-		if (opts.revert) {
-			args.push('-revert');
-		}
+	if (typeof opts.dcScanOpt !== 'undefined') {
+		args.push('-dc-scan-opt', opts.dcScanOpt);
+	}
 
-		if (opts.fastcrush) {
-			args.push('-fastcrush');
-		}
+	if (opts.notrellis) {
+		args.push('-notrellis');
+	}
 
-		if (typeof opts.dcScanOpt !== 'undefined') {
-			args.push('-dc-scan-opt', opts.dcScanOpt);
-		}
+	if (opts.notrellisDC) {
+		args.push('-notrellis-dc');
+	}
 
-		if (opts.notrellis) {
-			args.push('-notrellis');
-		}
+	if (opts.tune) {
+		args.push(`-tune-${opts.tune}`);
+	}
 
-		if (opts.notrellisDC) {
-			args.push('-notrellis-dc');
-		}
+	if (opts.noovershoot) {
+		args.push('-noovershoot');
+	}
 
-		if (opts.tune) {
-			args.push('-tune-' + opts.tune);
-		}
+	if (opts.arithmetic) {
+		args.push('-arithmetic');
+	}
 
-		if (opts.noovershoot) {
-			args.push('-noovershoot');
-		}
+	if (opts.dct) {
+		args.push('-dct', opts.dct);
+	}
 
-		if (opts.arithmetic) {
-			args.push('-arithmetic');
-		}
+	if (typeof opts.quantTable !== 'undefined') {
+		args.push('-quant-table', opts.quantTable);
+	}
 
-		if (opts.dct) {
-			args.push('-dct', opts.dct);
-		}
+	if (opts.smooth) {
+		args.push('-smooth', opts.smooth);
+	}
 
-		if (typeof opts.quantTable !== 'undefined') {
-			args.push('-quant-table', opts.quantTable);
-		}
+	if (opts.maxmemory) {
+		args.push('-maxmemory', opts.maxmemory);
+	}
 
-		if (opts.smooth) {
-			args.push('-smooth', opts.smooth);
-		}
+	args.push(execBuffer.input);
 
-		if (opts.maxmemory) {
-			args.push('-maxmemory', opts.maxmemory);
-		}
-
-		var cp = spawn(mozjpeg, args);
-
-		cp.stderr.setEncoding('utf8');
-		cp.stderr.on('data', function (data) {
-			err += data;
-		});
-
-		cp.stdout.on('data', function (data) {
-			ret.push(data);
-			len += data.length;
-		});
-
-		cp.on('error', function (err) {
-			err.fileName = file.path;
-			cb(err);
-			return;
-		});
-
-		cp.on('close', function (code) {
-			if (code) {
-				err = new Error(err);
-				err.fileName = file.path;
-				cb(err);
-				return;
-			}
-
-			if (len < file.contents.length) {
-				file.contents = Buffer.concat(ret, len);
-			}
-
-			cb(null, file);
-		});
-
-		cp.stdin.on('error', function (stdinErr) {
-			if (!err) {
-				err = stdinErr;
-			}
-		});
-
-		cp.stdin.end(file.contents);
+	return execBuffer({
+		input: buf,
+		bin: mozjpeg,
+		args
+	}).catch(err => {
+		err.message = err.stderr || err.message;
+		throw err;
 	});
 };
