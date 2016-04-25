@@ -24,7 +24,7 @@ imagemin('images/*.jpg', 'build/images', {use: [imageminMozjpeg()]}).then(() => 
 
 ## API
 
-### imageminMozjpeg(options)(buffer)
+### imageminMozjpeg([options])(buffer)
 
 Returns a promise for a buffer.
 
@@ -38,35 +38,35 @@ Compression quality. Min and max are numbers in range 0 (worst) to 100 (perfect)
 
 ##### progressive
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `true`
 
 `false` creates baseline JPEG file.
 
 ##### targa
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `false`
 
 Input file is Targa format (usually not needed).
 
 ##### revert
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `false`
 
 Revert to standard defaults instead of mozjpeg defaults.
 
 ##### fastcrush
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable progressive scan optimization.
 
 ##### dcScanOpt
 
-Type: `number`  
+Type: `number`<br>
 Default: `1`
 
 Set DC scan optimization mode.
@@ -77,35 +77,35 @@ Set DC scan optimization mode.
 
 ##### notrellis
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable [trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
 
 ##### notrellisDC
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable trellis optimization of DC coefficients.
 
 ##### tune
 
-Type: `string`  
+Type: `string`<br>
 Default: `hvs-psnr`
 
 Set trellis optimization method. Available methods: `psnr`, `hvs-psnr`, `ssim` and `ms-ssim`
 
 ##### noovershoot
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable black-on-white deringing via overshoot.
 
 ##### arithmetic
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Use [arithmetic coding](https://en.wikipedia.org/wiki/Arithmetic_coding).
