@@ -13,71 +13,60 @@ $ npm install --save imagemin-mozjpeg
 ## Usage
 
 ```js
-var Imagemin = require('imagemin');
-var imageminMozjpeg = require('imagemin-mozjpeg');
+const imagemin = require('imagemin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
-new Imagemin()
-	.src('images/*.jpg')
-	.dest('build/images')
-	.use(imageminMozjpeg({quality: 80}))
-	.run();
-```
-
-You can also use this plugin with [gulp](http://gulpjs.com):
-
-```js
-var gulp = require('gulp');
-var imageminMozjpeg = require('imagemin-mozjpeg');
-
-gulp.task('default', function () {
-	return gulp.src('images/*.jpg')
-		.pipe(imageminMozjpeg({quality: 80})())
-		.pipe(gulp.dest('build/images'));
+imagemin(['images/*.jpg'], 'build/images', {use: [imageminMozjpeg()]}).then(() => {
+	console.log('Images optimized');
 });
 ```
 
 
 ## API
 
-### imageminMozjpeg(options)
+### imageminMozjpeg([options])(buffer)
 
-#### options.quality
+Returns a promise for a buffer.
+
+#### options
+
+##### quality
 
 Type: `number`
 
 Compression quality. Min and max are numbers in range 0 (worst) to 100 (perfect).
 
-#### options.progressive
+##### progressive
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `true`
 
 `false` creates baseline JPEG file.
 
-#### options.targa
+##### targa
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `false`
 
 Input file is Targa format (usually not needed).
 
-#### options.revert
+##### revert
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `false`
 
 Revert to standard defaults instead of mozjpeg defaults.
 
-#### options.fastcrush
+##### fastcrush
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable progressive scan optimization.
 
-#### options.dcScanOpt
+##### dcScanOpt
 
-Type: `number`  
+Type: `number`<br>
 Default: `1`
 
 Set DC scan optimization mode.
@@ -86,42 +75,42 @@ Set DC scan optimization mode.
 * `1` One scan per component
 * `2` Optimize between one scan for all components and one scan for 1st component plus one scan for remaining components
 
-#### options.notrellis
+##### notrellis
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable [trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
 
-#### options.notrellisDC
+##### notrellisDC
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable trellis optimization of DC coefficients.
 
-#### options.tune
+##### tune
 
-Type: `string`  
+Type: `string`<br>
 Default: `hvs-psnr`
 
 Set trellis optimization method. Available methods: `psnr`, `hvs-psnr`, `ssim` and `ms-ssim`
 
-#### options.noovershoot
+##### noovershoot
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Disable black-on-white deringing via overshoot.
 
-#### options.arithmetic
+##### arithmetic
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false`
 
 Use [arithmetic coding](https://en.wikipedia.org/wiki/Arithmetic_coding).
 
-#### options.quantTable
+##### quantTable
 
 Type: `number`
 
@@ -134,17 +123,23 @@ Use predefined quantization table.
 * `4` Custom, tuned for PSNR-HVS
 * `5` Table from paper by Klein, Silverstein and Carney
 
-#### options.smooth
+##### smooth
 
 Type: `number`
 
 Set the strength of smooth dithered input. (1...100)
 
-#### options.maxmemory
+##### maxmemory
 
 Type: `number`
 
 Set the maximum memory to use in kbytes.
+
+#### buffer
+
+Type: `buffer`
+
+Buffer to optimize.
 
 
 ## License
