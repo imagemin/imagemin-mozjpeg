@@ -16,7 +16,7 @@ $ npm install --save imagemin-mozjpeg
 const imagemin = require('imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
-imagemin('images/*.jpg', 'build/images', {use: [imageminMozjpeg()]}).then(() => {
+imagemin(['images/*.jpg'], 'build/images', {use: [imageminMozjpeg()]}).then(() => {
 	console.log('Images optimized');
 });
 ```
