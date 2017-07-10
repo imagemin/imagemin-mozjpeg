@@ -142,6 +142,13 @@ Type: `buffer`
 Buffer to optimize.
 
 
+#### sample
+
+Type: `string`
+
+Chroma subsampling scheme.
+
+
 ## License
 
 MIT © [imagemin](https://github.com/imagemin)

@@ -76,6 +76,10 @@ module.exports = opts => buf => {
 		args.push('-maxmemory', opts.maxmemory);
 	}
 
+	if (opts.sample) {
+		args.push('-sample', opts.sample);
+	}
+
 	args.push(execBuffer.input);
 
 	return execBuffer({
