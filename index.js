@@ -1,5 +1,5 @@
 'use strict';
-const execa = require('execa');
+const execBuffer = require('exec-buffer');
 const isJpg = require('is-jpg');
 const mozjpeg = require('mozjpeg');
 
@@ -14,7 +14,7 @@ module.exports = opts => buf => {
 		return Promise.resolve(buf);
 	}
 
-	const args = [];
+	const args = ['-outfile', execBuffer.output];
 
 	if (typeof opts.quality !== 'undefined') {
 		args.push('-quality', opts.quality);
@@ -76,9 +76,16 @@ module.exports = opts => buf => {
 		args.push('-maxmemory', opts.maxmemory);
 	}
 
-	return execa.stdout(mozjpeg, args, {
-		encoding: null,
-		input: buf
+	if (opts.sample) {
+		args.push('-sample', opts.sample);
+	}
+
+	args.push(execBuffer.input);
+
+	return execBuffer({
+		input: buf,
+		bin: mozjpeg,
+		args
 	}).catch(err => {
 		err.message = err.stderr || err.message;
 		throw err;
