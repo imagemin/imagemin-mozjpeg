@@ -4,7 +4,7 @@ import isJpg from 'is-jpg';
 import isProgressive from 'is-progressive';
 import pify from 'pify';
 import test from 'ava';
-import m from './';
+import m from '.';
 
 const fsP = pify(fs);
 

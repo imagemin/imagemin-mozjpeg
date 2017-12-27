@@ -3,84 +3,82 @@ const execa = require('execa');
 const isJpg = require('is-jpg');
 const mozjpeg = require('mozjpeg');
 
-module.exports = opts => buf => {
-	opts = Object.assign({}, opts);
+module.exports = options => buffer => {
+	options = Object.assign({}, options);
 
-	if (!Buffer.isBuffer(buf)) {
+	if (!Buffer.isBuffer(buffer)) {
 		return Promise.reject(new TypeError('Expected a buffer'));
 	}
 
-	if (!isJpg(buf)) {
-		return Promise.resolve(buf);
+	if (!isJpg(buffer)) {
+		return Promise.resolve(buffer);
 	}
 
 	const args = [];
 
-	if (typeof opts.quality !== 'undefined') {
-		args.push('-quality', opts.quality);
+	if (typeof options.quality !== 'undefined') {
+		args.push('-quality', options.quality);
 	}
 
-	if (opts.progressive === false) {
+	if (options.progressive === false) {
 		args.push('-baseline');
 	}
 
-	if (opts.targa) {
+	if (options.targa) {
 		args.push('-targa');
 	}
 
-	if (opts.revert) {
+	if (options.revert) {
 		args.push('-revert');
 	}
 
-	if (opts.fastcrush) {
+	if (options.fastcrush) {
 		args.push('-fastcrush');
 	}
 
-	if (typeof opts.dcScanOpt !== 'undefined') {
-		args.push('-dc-scan-opt', opts.dcScanOpt);
+	if (typeof options.dcScanOpt !== 'undefined') {
+		args.push('-dc-scan-opt', options.dcScanOpt);
 	}
 
-	if (opts.notrellis) {
+	if (options.notrellis) {
 		args.push('-notrellis');
 	}
 
-	if (opts.notrellisDC) {
+	if (options.notrellisDC) {
 		args.push('-notrellis-dc');
 	}
 
-	if (opts.tune) {
-		args.push(`-tune-${opts.tune}`);
+	if (options.tune) {
+		args.push(`-tune-${options.tune}`);
 	}
 
-	if (opts.noovershoot) {
+	if (options.noovershoot) {
 		args.push('-noovershoot');
 	}
 
-	if (opts.arithmetic) {
+	if (options.arithmetic) {
 		args.push('-arithmetic');
 	}
 
-	if (opts.dct) {
-		args.push('-dct', opts.dct);
+	if (options.dct) {
+		args.push('-dct', options.dct);
 	}
 
-	if (typeof opts.quantTable !== 'undefined') {
-		args.push('-quant-table', opts.quantTable);
+	if (typeof options.quantTable !== 'undefined') {
+		args.push('-quant-table', options.quantTable);
 	}
 
-	if (opts.smooth) {
-		args.push('-smooth', opts.smooth);
+	if (options.smooth) {
+		args.push('-smooth', options.smooth);
 	}
 
-	if (opts.maxmemory) {
-		args.push('-maxmemory', opts.maxmemory);
+	if (options.maxmemory) {
+		args.push('-maxmemory', options.maxmemory);
 	}
 
 	return execa.stdout(mozjpeg, args, {
 		encoding: null,
-		input: buf
-	}).catch(err => {
-		err.message = err.stderr || err.message;
-		throw err;
+		input: buffer,
+		maxBuffer: Infinity
 	});
 };

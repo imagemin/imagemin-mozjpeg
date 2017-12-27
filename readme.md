@@ -1,12 +1,12 @@
 # imagemin-mozjpeg [![Build Status](https://travis-ci.org/imagemin/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/imagemin/imagemin-mozjpeg) [![Build status](https://ci.appveyor.com/api/projects/status/uuh7yi48erf4ykyo?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/imagemin-mozjpeg)
 
-> mozjpeg imagemin plugin
+> [Imagemin](https://github.com/imagemin/imagemin) plugin for [mozjpeg](https://github.com/mozilla/mozjpeg)
 
 
 ## Install
 
 ```
-$ npm install --save imagemin-mozjpeg
+$ npm install imagemin-mozjpeg
 ```
 
 
@@ -16,9 +16,15 @@ $ npm install --save imagemin-mozjpeg
 const imagemin = require('imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
-imagemin(['images/*.jpg'], 'build/images', {use: [imageminMozjpeg()]}).then(() => {
+(async () => {
+	await imagemin(['images/*.jpg'], 'build/images', {
+		use: [
+			imageminMozjpeg()
+		]
+	});
+
 	console.log('Images optimized');
-});
+})();
 ```
 
 
@@ -26,7 +32,7 @@ imagemin(['images/*.jpg'], 'build/images', {use: [imageminMozjpeg()]}).then(() =
 
 ### imageminMozjpeg([options])(buffer)
 
-Returns a promise for a buffer.
+Returns a `Promise<Buffer>`.
 
 #### options
 
@@ -34,7 +40,7 @@ Returns a promise for a buffer.
 
 Type: `number`
 
-Compression quality. Min and max are numbers in range 0 (worst) to 100 (perfect).
+Compression quality, in range `0` (worst) to `100` (perfect).
 
 ##### progressive
 
@@ -71,23 +77,23 @@ Default: `1`
 
 Set DC scan optimization mode.
 
-* `0` One scan for all components
-* `1` One scan per component
-* `2` Optimize between one scan for all components and one scan for 1st component plus one scan for remaining components
+- `0` One scan for all components
+- `1` One scan per component
+- `2` Optimize between one scan for all components and one scan for 1st component plus one scan for remaining components
 
 ##### notrellis
 
 Type: `boolean`<br>
 Default: `false`
 
-Disable [trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
+Disable [Trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
 
 ##### notrellisDC
 
 Type: `boolean`<br>
 Default: `false`
 
-Disable trellis optimization of DC coefficients.
+Disable Trellis optimization of DC coefficients.
 
 ##### tune
 
@@ -116,12 +122,12 @@ Type: `number`
 
 Use predefined quantization table.
 
-* `0` JPEG Annex K
-* `1` Flat
-* `2` Custom, tuned for MS-SSIM
-* `3` ImageMagick table by N. Robidoux
-* `4` Custom, tuned for PSNR-HVS
-* `5` Table from paper by Klein, Silverstein and Carney
+- `0` JPEG Annex K
+- `1` Flat
+- `2` Custom, tuned for MS-SSIM
+- `3` ImageMagick table by N. Robidoux
+- `4` Custom, tuned for PSNR-HVS
+- `5` Table from paper by Klein, Silverstein and Carney
 
 ##### smooth
 
@@ -133,7 +139,7 @@ Set the strength of smooth dithered input. (1...100)
 
 Type: `number`
 
-Set the maximum memory to use in kbytes.
+Set the maximum memory to use in kilobytes.
 
 #### buffer
 
@@ -144,4 +150,4 @@ Buffer to optimize.
 
 ## License
 
-MIT © [imagemin](https://github.com/imagemin)
+MIT © [Imagemin](https://github.com/imagemin)
