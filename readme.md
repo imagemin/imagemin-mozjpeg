@@ -159,6 +159,12 @@ Type: `number`
 
 Set the maximum memory to use in kilobytes.
 
+##### sample
+
+Type: `string[]`
+
+Set component sampling factors. Each item should be in the format `HxV`, for example `2x1`.
+
 #### buffer
 
 Type: `buffer`

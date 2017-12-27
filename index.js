@@ -98,6 +98,10 @@ module.exports = options => buffer => {
 		args.push('-maxmemory', options.maxMemory);
 	}
 
+	if (options.sample) {
+		args.push('-sample', options.sample.join(','));
+	}
+
 	return execa.stdout(mozjpeg, args, {
 		encoding: null,
 		input: buffer,
