@@ -33,5 +33,5 @@ test('skip optimizing a non-JPG file', async t => {
 
 test('throw error when a JPG is corrupt', async t => {
 	const buf = await fsP.readFile(path.join(__dirname, 'fixture-corrupt.jpg'));
-	t.throws(m()(buf), /Corrupt JPEG data/);
+	await t.throws(m()(buf), /Corrupt JPEG data/);
 });

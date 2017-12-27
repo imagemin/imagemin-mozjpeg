@@ -41,14 +41,14 @@
     "optimize"
   ],
   "dependencies": {
-    "execa": "^0.4.0",
+    "execa": "^0.8.0",
     "is-jpg": "^1.0.0",
-    "mozjpeg": "^4.0.0"
+    "mozjpeg": "^5.0.0"
   },
   "devDependencies": {
     "ava": "*",
-    "is-progressive": "^1.0.1",
-    "pify": "^2.3.0",
+    "is-progressive": "^3.0.0",
+    "pify": "^3.0.0",
     "xo": "*"
   },
   "xo": {
