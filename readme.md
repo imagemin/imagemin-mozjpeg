@@ -63,7 +63,7 @@ Default: `false`
 
 Revert to standard defaults instead of mozjpeg defaults.
 
-##### fastcrush
+##### fastCrush
 
 Type: `boolean`<br>
 Default: `false`
@@ -81,33 +81,33 @@ Set DC scan optimization mode.
 - `1` One scan per component
 - `2` Optimize between one scan for all components and one scan for 1st component plus one scan for remaining components
 
-##### notrellis
+##### trellis
 
 Type: `boolean`<br>
-Default: `false`
+Default: `true`
 
-Disable [Trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
+[Trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
 
-##### notrellisDC
+##### trellisDC
 
 Type: `boolean`<br>
-Default: `false`
+Default: `true`
 
-Disable Trellis optimization of DC coefficients.
+Trellis optimization of DC coefficients.
 
 ##### tune
 
 Type: `string`<br>
 Default: `hvs-psnr`
 
-Set trellis optimization method. Available methods: `psnr`, `hvs-psnr`, `ssim` and `ms-ssim`
+Set Trellis optimization method. Available methods: `psnr`, `hvs-psnr`, `ssim`, `ms-ssim`
 
-##### noovershoot
+##### overshoot
 
 Type: `boolean`<br>
-Default: `false`
+Default: `true`
 
-Disable black-on-white deringing via overshoot.
+Black-on-white deringing via overshoot.
 
 ##### arithmetic
 
@@ -115,6 +115,24 @@ Type: `boolean`<br>
 Default: `false`
 
 Use [arithmetic coding](https://en.wikipedia.org/wiki/Arithmetic_coding).
+
+##### dct
+
+Type: `string`<br>
+Default: `int`
+
+Set [DCT](https://en.wikipedia.org/wiki/Discrete_cosine_transform) method:
+
+- `int` Use integer DCT
+- `fast` Use fast integer DCT (less accurate)
+- `float` Use floating-point DCT
+
+##### quantBaseline
+
+Type: `boolean`<br>
+Default: `false`
+
+Use 8-bit quantization table entries for baseline JPEG compatibility.
 
 ##### quantTable
 
@@ -135,7 +153,7 @@ Type: `number`
 
 Set the strength of smooth dithered input. (1...100)
 
-##### maxmemory
+##### maxMemory
 
 Type: `number`
 
