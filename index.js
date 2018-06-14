@@ -102,6 +102,22 @@ module.exports = options => buffer => {
 		args.push('-sample', options.sample.join(','));
 	}
 
+	if (options.rotate) {
+		args.push('-rotate', options.rotate);
+	}
+
+	if (options.flip) {
+		args.push('-flip', options.flip);
+	}
+
+	if (options.transpose) {
+		args.push('-transpose');
+	}
+
+	if (options.transverse) {
+		args.push('-transverse');
+	}
+
 	return execa.stdout(mozjpeg, args, {
 		encoding: null,
 		input: buffer,

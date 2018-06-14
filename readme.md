@@ -171,6 +171,46 @@ Type: `buffer`
 
 Buffer to optimize.
 
+##### rotate
+
+Type: `number`
+
+Set the rotation in degrees.
+- `90` Rotate image 90 degrees clockwise.
+- `180` Rotate image 180 degrees.
+- `270` Rotate image 270 degrees clockwise (or 90 ccw).
+
+##### flip
+
+Type: `string`
+
+Flips the image.
+
+- `horizontal` Mirror image horizontally (left-right).
+- `vertical` Mirror image vertically (top-bottom).
+
+##### transpose
+
+Type: `string`
+
+Flips the image.
+
+- `horizontal` Mirror image horizontally (left-right).
+- `vertical` Mirror image vertically (top-bottom).
+
+##### transpose
+
+Type: `boolean`<br>
+Default: `false`
+
+Transpose image (across UL-to-LR axis).
+
+##### transverse
+
+Type: `boolean`<br>
+Default: `false`
+
+Transverse transpose (across UR-to-LL axis).
 
 ## License
 
