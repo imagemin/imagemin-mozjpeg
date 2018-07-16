@@ -41,9 +41,9 @@
     "optimize"
   ],
   "dependencies": {
-    "execa": "^0.8.0",
-    "is-jpg": "^1.0.0",
-    "mozjpeg": "^5.0.0"
+    "execa": "^0.10.0",
+    "is-jpg": "^2.0.0",
+    "mozjpeg": "^6.0.0"
   },
   "devDependencies": {
     "ava": "*",
