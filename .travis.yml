@@ -3,6 +3,6 @@ os:
   - osx
 osx_image: xcode8.3
 node_js:
+  - '10'
   - '8'
   - '6'
-  - '4'
