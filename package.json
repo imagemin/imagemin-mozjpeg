@@ -46,9 +46,9 @@
     "mozjpeg": "^6.0.0"
   },
   "devDependencies": {
-    "ava": "*",
+    "ava": "^1.0.1",
     "is-progressive": "^3.0.0",
     "pify": "^4.0.0",
-    "xo": "*"
+    "xo": "^0.23.0"
   }
 }
