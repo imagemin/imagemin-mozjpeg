@@ -41,7 +41,7 @@
     "optimize"
   ],
   "dependencies": {
-    "execa": "^4.0.0",
+    "execa": "^5.0.0",
     "is-jpg": "^2.0.0",
     "mozjpeg": "^7.0.0"
   },
