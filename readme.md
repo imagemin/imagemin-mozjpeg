@@ -1,4 +1,4 @@
-# imagemin-mozjpeg [![Build Status](https://travis-ci.org/imagemin/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/imagemin/imagemin-mozjpeg)
+# imagemin-mozjpeg ![GitHub Actions Status](https://github.com/imagemin/imagemin-mozjpeg/workflows/test/badge.svg?branch=master)
 
 > [Imagemin](https://github.com/imagemin/imagemin) plugin for [mozjpeg](https://github.com/mozilla/mozjpeg)
 
