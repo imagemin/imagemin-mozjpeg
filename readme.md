@@ -1,14 +1,12 @@
-# imagemin-mozjpeg ![GitHub Actions Status](https://github.com/imagemin/imagemin-mozjpeg/workflows/test/badge.svg?branch=master)
+# imagemin-mozjpeg
 
 > [Imagemin](https://github.com/imagemin/imagemin) plugin for [mozjpeg](https://github.com/mozilla/mozjpeg)
-
 
 ## Install
 
 ```
 $ npm install imagemin-mozjpeg
 ```
-
 
 ## Usage
 
@@ -28,14 +26,15 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 })();
 ```
 
-
 ## API
 
-### imageminMozjpeg([options])(buffer)
+### imageminMozjpeg(options?)(buffer)
 
 Returns a `Promise<Buffer>`.
 
 #### options
+
+Type: `object`
 
 ##### quality
 
@@ -45,35 +44,35 @@ Compression quality, in range `0` (worst) to `100` (perfect).
 
 ##### progressive
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `true`
 
 `false` creates baseline JPEG file.
 
 ##### targa
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `false`
 
 Input file is Targa format (usually not needed).
 
 ##### revert
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `false`
 
 Revert to standard defaults instead of mozjpeg defaults.
 
 ##### fastCrush
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `false`
 
 Disable progressive scan optimization.
 
 ##### dcScanOpt
 
-Type: `number`<br>
+Type: `number`\
 Default: `1`
 
 Set DC scan optimization mode.
@@ -84,42 +83,42 @@ Set DC scan optimization mode.
 
 ##### trellis
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `true`
 
 [Trellis optimization](https://en.wikipedia.org/wiki/Trellis_quantization).
 
 ##### trellisDC
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `true`
 
 Trellis optimization of DC coefficients.
 
 ##### tune
 
-Type: `string`<br>
+Type: `string`\
 Default: `hvs-psnr`
 
 Set Trellis optimization method. Available methods: `psnr`, `hvs-psnr`, `ssim`, `ms-ssim`
 
 ##### overshoot
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `true`
 
 Black-on-white deringing via overshoot.
 
 ##### arithmetic
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `false`
 
 Use [arithmetic coding](https://en.wikipedia.org/wiki/Arithmetic_coding).
 
 ##### dct
 
-Type: `string`<br>
+Type: `string`\
 Default: `int`
 
 Set [DCT](https://en.wikipedia.org/wiki/Discrete_cosine_transform) method:
@@ -130,7 +129,7 @@ Set [DCT](https://en.wikipedia.org/wiki/Discrete_cosine_transform) method:
 
 ##### quantBaseline
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `false`
 
 Use 8-bit quantization table entries for baseline JPEG compatibility.
@@ -171,8 +170,3 @@ Set component sampling factors. Each item should be in the format `HxV`, for exa
 Type: `buffer`
 
 Buffer to optimize.
-
-
-## License
-
-MIT © [Imagemin](https://github.com/imagemin)
