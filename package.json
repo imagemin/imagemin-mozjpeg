@@ -4,6 +4,8 @@
   "description": "Imagemin plugin for mozjpeg",
   "license": "MIT",
   "repository": "imagemin/imagemin-mozjpeg",
+  "type": "module",
+  "exports": "./index.js",
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
@@ -21,7 +23,7 @@
     }
   ],
   "engines": {
-    "node": ">=10"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
     "test": "xo && ava"
@@ -41,13 +43,13 @@
     "optimize"
   ],
   "dependencies": {
-    "execa": "^4.0.0",
-    "is-jpg": "^2.0.0",
-    "mozjpeg": "^7.0.0"
+    "execa": "^6.0.0",
+    "is-jpg": "^3.0.0",
+    "mozjpeg": "^8.0.0"
   },
   "devDependencies": {
-    "ava": "^3.8.0",
+    "ava": "^3.15.0",
     "is-progressive": "^3.0.0",
-    "xo": "^0.30.0"
+    "xo": "^0.47.0"
   }
 }

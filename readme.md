@@ -11,8 +11,8 @@ $ npm install imagemin-mozjpeg
 ## Usage
 
 ```js
-const imagemin = require('imagemin');
-const imageminMozjpeg = require('imagemin-mozjpeg');
+import imagemin from 'imagemin';
+import imageminMozjpeg from 'imagemin-mozjpeg';
 
 (async () => {
 	await imagemin(['images/*.jpg'], {

@@ -1,14 +1,14 @@
-'use strict';
-const execa = require('execa');
-const isJpg = require('is-jpg');
-const mozjpeg = require('mozjpeg');
+import {Buffer} from 'node:buffer';
+import {execa} from 'execa';
+import isJpg from 'is-jpg';
+import mozjpeg from 'mozjpeg';
 
-module.exports = options => async buffer => {
+const imageminMozjpeg = options => async buffer => {
 	options = {
 		trellis: true,
 		trellisDC: true,
 		overshoot: true,
-		...options
+		...options,
 	};
 
 	if (!Buffer.isBuffer(buffer)) {
@@ -109,8 +109,10 @@ module.exports = options => async buffer => {
 	const {stdout} = await execa(mozjpeg, args, {
 		encoding: null,
 		input: buffer,
-		maxBuffer: Infinity
+		maxBuffer: Number.POSITIVE_INFINITY,
 	});
 
 	return stdout;
 };
+
+export default imageminMozjpeg;
